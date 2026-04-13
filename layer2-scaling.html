@@ -15,78 +15,89 @@
     </style>
 </head>
 <body class="min-h-screen pb-20">
-    <nav class="border-b border-white/5 p-6 flex justify-between items-center sticky top-0 bg-black/60 backdrop-blur-2xl z-50">
-        <a href="index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-            Volver al Lab
-        </a>
-        <h1 class="text-xl font-black tracking-tighter accent-text uppercase">Layer 2 & Scaling Mastery</h1>
+    <nav class="border-b border-white/5 p-4 flex justify-between items-center sticky top-0 bg-black/60 backdrop-blur-2xl z-50">
+        <div class="flex items-center gap-3">
+            <a href="index.html" class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-black text-white text-xl">W3</a>
+            <h1 class="text-xl font-extrabold tracking-tighter uppercase">MASTER<span class="font-light text-slate-400">LAB</span></h1>
+        </div>
+        <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
+            <a href="index.html#concepts" class="hover:text-white transition-colors">Conceptos</a>
+            <a href="index.html#lab" class="hover:text-white transition-colors">Laboratorio</a>
+            <a href="use-cases.html" class="hover:text-white transition-colors">Casos de Uso</a>
+            <a href="poc-design.html" class="hover:text-white transition-colors">Diseño de PoC</a>
+            <a href="index.html#tools" class="hover:text-white transition-colors">Herramientas</a>
+        </div>
+        <div id="connection-status" class="flex items-center gap-4">
+            <button id="main-connect-btn" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all hover:scale-105">
+                Conectar Wallet
+            </button>
+        </div>
     </nav>
 
     <main class="max-w-5xl mx-auto px-6 mt-20 space-y-32">
-        <header class="space-y-6">
-            <h2 class="text-6xl font-black leading-tight">Ethereum a <span class="accent-text text-white underline decoration-rose-500/50">Velocidad Luz</span>.</h2>
-            <p class="text-slate-400 text-xl leading-relaxed">
-                Aprende cómo escalar aplicaciones a millones de usuarios pagando centavos de gas sin sacrificar la seguridad de la Layer 1.
+        <header class="space-y-6 text-center">
+            <h2 class="text-6xl font-black leading-tight">Escalabilidad de Red y <span class="accent-text text-white underline decoration-rose-500/50">Protocolos de Capa 2</span>.</h2>
+            <p class="text-slate-400 text-xl leading-relaxed max-w-3xl mx-auto">
+                Análisis técnico de soluciones de escalabilidad off-chain para la optimización de costes y rendimiento en el ecosistema Ethereum.
             </p>
         </header>
 
         <!-- El Problema y la Solución -->
         <section class="grid md:grid-cols-2 gap-16 items-center">
             <div class="space-y-6">
-                <h3 class="text-3xl font-bold italic">¿Por qué necesitamos Layer 2?</h3>
+                <h3 class="text-3xl font-bold italic">El Desafío de la Escalabilidad en L1</h3>
                 <p class="text-sm text-slate-400 leading-relaxed">
-                    Ethereum es como una autopista de un solo carril muy segura pero lenta. En horas pico, el peaje (Gas) sube a $50 USD. 
+                    La Capa 1 (L1) de Ethereum prioriza la seguridad y la descentralización, lo que limita su rendimiento transaccional (TPS). En periodos de alta demanda, los costes de gas pueden ser prohibitivos para la mayoría de los casos de uso.
                     <br><br>
-                    Las **Layer 2 (L2)** son autopistas laterales que procesan miles de transacciones por segundo y luego envían un "resumen" a la autopista principal.
+                    Las **Layer 2 (L2)** operan como protocolos secundarios que procesan transacciones fuera de la cadena principal, manteniendo las garantías de seguridad mediante pruebas criptográficas enviadas a la L1.
                 </p>
                 <div class="p-6 l2-card rounded-xl">
-                    <h5 class="font-bold text-rose-400 mb-2">Beneficios Clave:</h5>
+                    <h5 class="font-bold text-rose-400 mb-2">Ventajas Operativas:</h5>
                     <ul class="text-xs space-y-2 text-slate-300 italic">
-                        <li>• Gas Fees 100x más baratos.</li>
-                        <li>• Confirmación instantánea (UX de Web2).</li>
-                        <li>• Heredan la seguridad de Ethereum.</li>
+                        <li>• Reducción de costes de gas de hasta 100x.</li>
+                        <li>• Tiempos de confirmación sub-segundos.</li>
+                        <li>• Interoperabilidad nativa con el estado de Ethereum.</li>
                     </ul>
                 </div>
             </div>
             <div class="glass p-8 space-y-4">
-                <h4 class="font-bold text-rose-400">El Trilema de la Blockchain</h4>
+                <h4 class="font-bold text-rose-400">El Trilema de Escalabilidad</h4>
                 <div class="aspect-square flex items-center justify-center relative border-2 border-white/5 rounded-full">
                     <div class="absolute top-4 font-bold text-[10px] uppercase tracking-widest text-white">Seguridad</div>
                     <div class="absolute bottom-4 left-4 font-bold text-[10px] uppercase tracking-widest text-white">Descentralización</div>
                     <div class="absolute bottom-4 right-4 font-bold text-[10px] uppercase tracking-widest text-white">Escalabilidad</div>
                     <div class="w-1/2 h-1/2 border-2 border-rose-500/50 rotate-45"></div>
                 </div>
-                <p class="text-[10px] text-center text-slate-500">Es difícil tener las tres al 100%. Las L2 resuelven la <b>Escalabilidad</b> apoyándose en la <b>Seguridad</b> de la L1.</p>
+                <p class="text-[10px] text-center text-slate-500">La arquitectura L2 permite optimizar la <b>Escalabilidad</b> sin comprometer los pilares de la L1.</p>
             </div>
         </section>
 
         <!-- Optimistic vs ZK Rollups -->
         <section class="space-y-12">
-            <h3 class="text-3xl font-bold text-center">La Guerra de los Rollups</h3>
+            <h3 class="text-3xl font-bold text-center">Taxonomía de los Rollups</h3>
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Optimistic -->
                 <div class="glass p-10 space-y-6 border-b-4 border-orange-500">
                     <div class="flex items-center gap-3">
-                        <span class="text-2xl">🐢</span>
+                        <span class="text-2xl">🛡️</span>
                         <h4 class="text-xl font-bold">Optimistic Rollups</h4>
                     </div>
-                    <p class="text-xs text-slate-400">"Asumen que todos son honestos". Si alguien miente, hay un periodo de 7 días para impugnar la transacción. Es simple y compatible con todo el código de Ethereum.</p>
+                    <p class="text-xs text-slate-400">Utilizan pruebas de fraude. Asumen la validez de las transacciones a menos que sean desafiadas durante un periodo de disputa. Alta compatibilidad con la EVM.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-orange-500/10 text-orange-500 px-3 py-1 rounded-full text-[10px] font-bold">Arbitrum</span>
-                        <span class="bg-orange-500/10 text-orange-500 px-3 py-1 rounded-full text-[10px] font-bold">Optimism</span>
-                        <span class="bg-orange-500/10 text-orange-500 px-3 py-1 rounded-full text-[10px] font-bold">Base (Coinbase)</span>
+                        <span class="bg-orange-500/10 text-orange-500 px-3 py-1 rounded-full text-[10px] font-bold">Arbitrum One</span>
+                        <span class="bg-orange-500/10 text-orange-500 px-3 py-1 rounded-full text-[10px] font-bold">Optimism Mainnet</span>
+                        <span class="bg-orange-500/10 text-orange-500 px-3 py-1 rounded-full text-[10px] font-bold">Base L2</span>
                     </div>
                 </div>
                 <!-- ZK Rollups -->
                 <div class="glass p-10 space-y-6 border-b-4 border-purple-500">
                     <div class="flex items-center gap-3">
-                        <span class="text-2xl">⚡</span>
-                        <h4 class="text-xl font-bold">ZK-Rollups (Zero Knowledge)</h4>
+                        <span class="text-2xl">🧬</span>
+                        <h4 class="text-xl font-bold">ZK-Rollups (Validity Proofs)</h4>
                     </div>
-                    <p class="text-xs text-slate-400">"No confían en nadie, usan matemáticas". Generan una prueba criptográfica de que las transacciones son válidas. Son instantáneas y más seguras, pero el código es más complejo.</p>
+                    <p class="text-xs text-slate-400">Utilizan pruebas de conocimiento cero (ZKP) para demostrar matemáticamente la validez de cada lote de transacciones. Finalidad inmediata y mayor seguridad teórica.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-full text-[10px] font-bold">zkSync</span>
+                        <span class="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-full text-[10px] font-bold">zkSync Era</span>
                         <span class="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-full text-[10px] font-bold">Starknet</span>
                         <span class="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-full text-[10px] font-bold">Polygon zkEVM</span>
                     </div>
@@ -96,38 +107,45 @@
 
         <!-- Cómo Cambiar de Red en Frontend -->
         <section class="space-y-8 bg-rose-600/5 p-12 rounded-[2rem] border border-rose-600/20">
-            <h3 class="text-2xl font-bold">Integración en el Frontend</h3>
+            <h3 class="text-2xl font-bold">Implementación en el Stack de Cliente</h3>
             <div class="grid md:grid-cols-2 gap-12 text-sm">
                 <p class="text-slate-400">
-                    Para que tu App use una L2, debes pedirle al usuario que cambie de red en MetaMask. Aquí está el código estándar para añadir Arbitrum:
+                    La integración de redes L2 requiere la gestión dinámica de cadenas (Chains) en el proveedor de la wallet. A continuación, se muestra el método estándar para la conmutación de red:
                 </p>
                 <pre class="code-font text-rose-300 text-[10px]">
-async function addArbitrum() {
-  await window.ethereum.request({
-    method: 'wallet_addEthereumChain',
-    params: [{
-      chainId: '0xa4b1', // 42161 en decimal
-      chainName: 'Arbitrum One',
-      nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
-      rpcUrls: ['https://arb1.arbitrum.io/rpc'],
-      blockExplorerUrls: ['https://arbiscan.io/']
-    }]
-  });
+/**
+ * Solicita el cambio a la red Arbitrum One
+ * RPC: https://arb1.arbitrum.io/rpc
+ */
+async function switchNetwork() {
+  try {
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: '0xa4b1' }], // 42161
+    });
+  } catch (error) {
+    if (error.code === 4902) {
+      // Lógica para añadir la red si no existe
+    }
+  }
 }</pre>
             </div>
         </section>
 
-        <!-- Por qué usarlo en Hackathons -->
+        <!-- Conclusión técnica -->
         <section class="glass p-10 text-center space-y-6">
-            <h3 class="text-2xl font-bold italic">Hackathon Tip: UX is King</h3>
+            <h3 class="text-2xl font-bold italic">El Futuro Centrado en Rollups</h3>
             <p class="text-slate-400 text-sm max-w-2xl mx-auto">
-                Nadie quiere usar una App donde cada click cuesta $10 y tarda 5 minutos. Desplegar en una L2 (como **Base** o **Arbitrum**) demuestra que piensas en el usuario final y en la adopción masiva.
+                La hoja de ruta de Ethereum (The Surge) posiciona a las Layer 2 como el principal entorno de ejecución para los usuarios finales, relegando a la Layer 1 a funciones críticas de seguridad y disponibilidad de datos (Data Availability).
             </p>
         </section>
     </main>
 
     <footer class="text-center py-20 text-slate-600 text-xs uppercase tracking-widest border-t border-white/5">
-        Web3 Master Lab - Módulo Layer 2 & Scaling
+        Web3 Master Lab - Scaling & Infrastructure Series
     </footer>
+
+    <!-- LÓGICA DE NEGOCIO -->
+    <script src="web3-examples.js"></script>
 </body>
 </html>
