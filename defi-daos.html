@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Dive: DeFi & DAOs | Web3 Master Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=JetBrains+Mono:wght@400;700&display=swap');
+        body { background-color: #030712; color: #f1f5f9; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.5rem; }
+        .accent-text { color: #3b82f6; }
+        .dao-card { border-left: 4px solid #3b82f6; background: rgba(59, 130, 246, 0.05); }
+        pre { background: #000 !important; border-radius: 1rem; padding: 1.5rem; font-size: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.05); overflow-x: auto; }
+        .math-font { font-family: 'JetBrains Mono', monospace; color: #60a5fa; }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+    <nav class="border-b border-white/5 p-6 flex justify-between items-center sticky top-0 bg-black/60 backdrop-blur-2xl z-50">
+        <a href="index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Volver al Lab
+        </a>
+        <h1 class="text-xl font-black tracking-tighter accent-text uppercase">DeFi & DAOs Mastery</h1>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 mt-20 space-y-32">
+        <header class="space-y-6">
+            <h2 class="text-6xl font-black leading-tight">Economía y <span class="accent-text text-white underline decoration-blue-500/50">Gobierno</span>.</h2>
+            <p class="text-slate-400 text-xl leading-relaxed">
+                Aprende a construir sistemas financieros que nadie controle y comunidades donde el voto de todos valga lo mismo.
+            </p>
+        </header>
+
+        <!-- DeFi Section: AMMs -->
+        <section class="space-y-12">
+            <h3 class="text-3xl font-bold italic">DeFi: El Motor del Capital</h3>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <h4 class="text-xl font-bold">La Magia del AMM</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Los **Automated Market Makers (AMM)** como Uniswap no usan libros de órdenes. Usan una fórmula matemática constante para determinar el precio:
+                    </p>
+                    <div class="glass p-6 text-center">
+                        <span class="math-font text-2xl font-bold">x * y = k</span>
+                        <p class="text-[10px] text-slate-500 mt-2">Donde <b>x</b> e <b>y</b> son las cantidades de dos tokens en el pool, y <b>k</b> es una constante fija.</p>
+                    </div>
+                    <p class="text-xs text-slate-400">
+                        Si alguien compra Token X, la cantidad de X disminuye, por lo tanto el precio de X debe subir para que <b>k</b> se mantenga igual. ¡Oferta y demanda pura en código!
+                    </p>
+                </div>
+                <div class="space-y-4">
+                    <span class="text-[10px] font-bold text-blue-400 uppercase tracking-widest">Ejemplo de Lógica de Swap</span>
+                    <pre class="code-font text-blue-300 text-[11px]">
+// Simplificación de un Swap
+function swap(uint amountIn, address tokenIn) public {
+    uint reserveIn = getReserve(tokenIn);
+    uint reserveOut = getReserve(tokenOut);
+    
+    // x * y = k
+    // (x + dx) * (y - dy) = k
+    uint amountOut = (reserveOut * amountIn) / (reserveIn + amountIn);
+    
+    IERC20(tokenIn).transferFrom(msg.sender, address(this), amountIn);
+    IERC20(tokenOut).transfer(msg.sender, amountOut);
+}</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Liquidity Pools & Yield -->
+        <section class="grid md:grid-cols-3 gap-8">
+            <div class="glass p-8 space-y-4 border-t-2 border-blue-500">
+                <h5 class="font-bold text-blue-400">Liquidity Provision</h5>
+                <p class="text-xs text-slate-400">Tú puedes ser el banco. Al depositar tus tokens en el pool, ganas una comisión por cada swap que otros hagan.</p>
+            </div>
+            <div class="glass p-8 space-y-4 border-t-2 border-blue-500">
+                <h5 class="font-bold text-blue-400">Impermanent Loss</h5>
+                <p class="text-xs text-slate-400">El riesgo de DeFi. Si el precio de un token cambia mucho respecto al otro, podrías haber ganado más simplemente guardándolos.</p>
+            </div>
+            <div class="glass p-8 space-y-4 border-t-2 border-blue-500">
+                <h5 class="font-bold text-blue-400">Stablecoins Alguaciles</h5>
+                <p class="text-xs text-slate-400">DAI o USDC permiten que la economía funcione sin la volatilidad extrema del Bitcoin o Ether.</p>
+            </div>
+        </section>
+
+        <!-- DAO Section: Governance -->
+        <section class="space-y-16">
+            <div class="text-center space-y-4">
+                <h3 class="text-4xl font-black italic">DAOs: El Futuro de la Colaboración</h3>
+                <p class="text-slate-400 max-w-2xl mx-auto text-sm">¿Cómo movemos $100 millones sin un jefe? Con gobernanza on-chain.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="glass p-10 space-y-6">
+                    <h4 class="text-xl font-bold accent-text">Snapshot (Voto Off-chain)</h4>
+                    <p class="text-xs text-slate-400">Para ahorrar gas, las comunidades votan firmando mensajes con su billetera (sin pagar comisión). Es democrático y transparente, pero la ejecución requiere que alguien la haga manualmente.</p>
+                    <div class="p-4 bg-black/40 rounded-lg">
+                        <span class="text-[10px] text-slate-500">USO COMÚN:</span>
+                        <p class="text-xs font-bold italic text-blue-300">Decidir la dirección de un proyecto o el arte de la próxima colección.</p>
+                    </div>
+                </div>
+                <div class="glass p-10 space-y-6 border-b-4 border-blue-600">
+                    <h4 class="text-xl font-bold accent-text">Governor (Voto On-chain)</h4>
+                    <p class="text-xs text-slate-400">Votos reales que cuestan gas. Si la propuesta pasa, el Smart Contract **obliga** a la tesorería a mover los fondos automáticamente. Nadie puede detenerlo.</p>
+                    <div class="p-4 bg-black/40 rounded-lg">
+                        <span class="text-[10px] text-slate-500">USO COMÚN:</span>
+                        <p class="text-xs font-bold italic text-blue-300">Cambiar parámetros del protocolo o transferir fondos de la tesorería.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Casos de Uso Reales -->
+        <section class="bg-blue-600/10 border border-blue-600/20 p-12 rounded-3xl space-y-8">
+            <h3 class="text-2xl font-bold italic">¿Por qué es revolucionario?</h3>
+            <div class="grid md:grid-cols-2 gap-12 text-sm leading-relaxed text-slate-300">
+                <div class="space-y-4">
+                    <p><b>1. Transparencia Radical:</b> En una DAO, puedes ver exactamente cuántos fondos hay en la caja y en qué se están gastando. No hay "gastos reservados".</p>
+                    <p><b>2. Resistencia a la Censura:</b> Un protocolo DeFi no puede discriminarte por tu país, crédito o religión. Si tienes los tokens, puedes usar el servicio.</p>
+                </div>
+                <div class="space-y-4">
+                    <p><b>3. Alineación de Incentivos:</b> Si el proyecto crece, el valor de tu token de gobernanza sube. Todos trabajan para el bien común del protocolo.</p>
+                    <p><b>4. Ejecución Atómica:</b> En DeFi, el intercambio de tokens ocurre en un solo paso. O se hace todo, o no se hace nada. Cero riesgo de estafa.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-20 text-slate-600 text-xs uppercase tracking-widest border-t border-white/5">
+        Web3 Master Lab - Módulo DeFi & DAOs
+    </footer>
+</body>
+</html>

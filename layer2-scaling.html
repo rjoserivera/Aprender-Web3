@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layer 2 & Scaling | Web3 Master Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=JetBrains+Mono:wght@400;700&display=swap');
+        body { background-color: #030712; color: #f1f5f9; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.5rem; }
+        .accent-text { color: #f43f5e; }
+        .l2-card { border-left: 4px solid #f43f5e; background: rgba(244, 63, 94, 0.05); }
+        pre { background: #000 !important; border-radius: 1rem; padding: 1.5rem; font-size: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.05); overflow-x: auto; }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+    <nav class="border-b border-white/5 p-6 flex justify-between items-center sticky top-0 bg-black/60 backdrop-blur-2xl z-50">
+        <a href="index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Volver al Lab
+        </a>
+        <h1 class="text-xl font-black tracking-tighter accent-text uppercase">Layer 2 & Scaling Mastery</h1>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 mt-20 space-y-32">
+        <header class="space-y-6">
+            <h2 class="text-6xl font-black leading-tight">Ethereum a <span class="accent-text text-white underline decoration-rose-500/50">Velocidad Luz</span>.</h2>
+            <p class="text-slate-400 text-xl leading-relaxed">
+                Aprende cómo escalar aplicaciones a millones de usuarios pagando centavos de gas sin sacrificar la seguridad de la Layer 1.
+            </p>
+        </header>
+
+        <!-- El Problema y la Solución -->
+        <section class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h3 class="text-3xl font-bold italic">¿Por qué necesitamos Layer 2?</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">
+                    Ethereum es como una autopista de un solo carril muy segura pero lenta. En horas pico, el peaje (Gas) sube a $50 USD. 
+                    <br><br>
+                    Las **Layer 2 (L2)** son autopistas laterales que procesan miles de transacciones por segundo y luego envían un "resumen" a la autopista principal.
+                </p>
+                <div class="p-6 l2-card rounded-xl">
+                    <h5 class="font-bold text-rose-400 mb-2">Beneficios Clave:</h5>
+                    <ul class="text-xs space-y-2 text-slate-300 italic">
+                        <li>• Gas Fees 100x más baratos.</li>
+                        <li>• Confirmación instantánea (UX de Web2).</li>
+                        <li>• Heredan la seguridad de Ethereum.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="glass p-8 space-y-4">
+                <h4 class="font-bold text-rose-400">El Trilema de la Blockchain</h4>
+                <div class="aspect-square flex items-center justify-center relative border-2 border-white/5 rounded-full">
+                    <div class="absolute top-4 font-bold text-[10px] uppercase tracking-widest text-white">Seguridad</div>
+                    <div class="absolute bottom-4 left-4 font-bold text-[10px] uppercase tracking-widest text-white">Descentralización</div>
+                    <div class="absolute bottom-4 right-4 font-bold text-[10px] uppercase tracking-widest text-white">Escalabilidad</div>
+                    <div class="w-1/2 h-1/2 border-2 border-rose-500/50 rotate-45"></div>
+                </div>
+                <p class="text-[10px] text-center text-slate-500">Es difícil tener las tres al 100%. Las L2 resuelven la <b>Escalabilidad</b> apoyándose en la <b>Seguridad</b> de la L1.</p>
+            </div>
+        </section>
+
+        <!-- Optimistic vs ZK Rollups -->
+        <section class="space-y-12">
+            <h3 class="text-3xl font-bold text-center">La Guerra de los Rollups</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Optimistic -->
+                <div class="glass p-10 space-y-6 border-b-4 border-orange-500">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">🐢</span>
+                        <h4 class="text-xl font-bold">Optimistic Rollups</h4>
+                    </div>
+                    <p class="text-xs text-slate-400">"Asumen que todos son honestos". Si alguien miente, hay un periodo de 7 días para impugnar la transacción. Es simple y compatible con todo el código de Ethereum.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-orange-500/10 text-orange-500 px-3 py-1 rounded-full text-[10px] font-bold">Arbitrum</span>
+                        <span class="bg-orange-500/10 text-orange-500 px-3 py-1 rounded-full text-[10px] font-bold">Optimism</span>
+                        <span class="bg-orange-500/10 text-orange-500 px-3 py-1 rounded-full text-[10px] font-bold">Base (Coinbase)</span>
+                    </div>
+                </div>
+                <!-- ZK Rollups -->
+                <div class="glass p-10 space-y-6 border-b-4 border-purple-500">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">⚡</span>
+                        <h4 class="text-xl font-bold">ZK-Rollups (Zero Knowledge)</h4>
+                    </div>
+                    <p class="text-xs text-slate-400">"No confían en nadie, usan matemáticas". Generan una prueba criptográfica de que las transacciones son válidas. Son instantáneas y más seguras, pero el código es más complejo.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-full text-[10px] font-bold">zkSync</span>
+                        <span class="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-full text-[10px] font-bold">Starknet</span>
+                        <span class="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-full text-[10px] font-bold">Polygon zkEVM</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cómo Cambiar de Red en Frontend -->
+        <section class="space-y-8 bg-rose-600/5 p-12 rounded-[2rem] border border-rose-600/20">
+            <h3 class="text-2xl font-bold">Integración en el Frontend</h3>
+            <div class="grid md:grid-cols-2 gap-12 text-sm">
+                <p class="text-slate-400">
+                    Para que tu App use una L2, debes pedirle al usuario que cambie de red en MetaMask. Aquí está el código estándar para añadir Arbitrum:
+                </p>
+                <pre class="code-font text-rose-300 text-[10px]">
+async function addArbitrum() {
+  await window.ethereum.request({
+    method: 'wallet_addEthereumChain',
+    params: [{
+      chainId: '0xa4b1', // 42161 en decimal
+      chainName: 'Arbitrum One',
+      nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+      rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+      blockExplorerUrls: ['https://arbiscan.io/']
+    }]
+  });
+}</pre>
+            </div>
+        </section>
+
+        <!-- Por qué usarlo en Hackathons -->
+        <section class="glass p-10 text-center space-y-6">
+            <h3 class="text-2xl font-bold italic">Hackathon Tip: UX is King</h3>
+            <p class="text-slate-400 text-sm max-w-2xl mx-auto">
+                Nadie quiere usar una App donde cada click cuesta $10 y tarda 5 minutos. Desplegar en una L2 (como **Base** o **Arbitrum**) demuestra que piensas en el usuario final y en la adopción masiva.
+            </p>
+        </section>
+    </main>
+
+    <footer class="text-center py-20 text-slate-600 text-xs uppercase tracking-widest border-t border-white/5">
+        Web3 Master Lab - Módulo Layer 2 & Scaling
+    </footer>
+</body>
+</html>

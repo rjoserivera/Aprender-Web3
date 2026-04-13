@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFTs & IPFS Mastery | Web3 Master Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=JetBrains+Mono:wght@400;700&display=swap');
+        body { background-color: #030712; color: #f1f5f9; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.5rem; }
+        .accent-text { color: #10b981; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        pre { background: #000 !important; border-radius: 1rem; padding: 1.5rem; font-size: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.05); overflow-x: auto; }
+        .pinata-box { border: 1px solid #ffb100; background: rgba(255, 177, 0, 0.05); }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+    <nav class="border-b border-white/5 p-6 flex justify-between items-center sticky top-0 bg-black/60 backdrop-blur-2xl z-50">
+        <a href="index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Volver al Lab
+        </a>
+        <h1 class="text-xl font-black tracking-tighter accent-text uppercase">NFTs & IPFS Mastery</h1>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 mt-20 space-y-32">
+        <header class="space-y-6">
+            <h2 class="text-6xl font-black leading-tight">Tu Arte en el <span class="accent-text text-white underline decoration-emerald-500/50">Espacio</span>.</h2>
+            <p class="text-slate-400 text-xl leading-relaxed">
+                Aprende a crear colecciones digitales que nadie pueda borrar ni censurar. Desde el pincel hasta la blockchain.
+            </p>
+        </header>
+
+        <!-- Tutorial: NFT Creation -->
+        <section class="space-y-12">
+            <h3 class="text-3xl font-bold italic">Flujo de Creación Profesional</h3>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-10">
+                    <div class="relative pl-8 border-l-2 border-emerald-500/30">
+                        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-emerald-600 flex items-center justify-center text-[10px] font-bold">1</div>
+                        <h5 class="font-bold">Sube a IPFS (Pinata)</h5>
+                        <p class="text-xs text-slate-400">Regístrate en **Pinata**. Sube tu imagen y copia el <b>CID</b> (Content Identifier). Ejemplo: <code>QmXoy...</code>. Este hash identifica tu archivo de forma única en todo el mundo.</p>
+                    </div>
+                    <div class="relative pl-8 border-l-2 border-emerald-500/30">
+                        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-emerald-600 flex items-center justify-center text-[10px] font-bold">2</div>
+                        <h5 class="font-bold">Genera los Metadatos</h5>
+                        <p class="text-xs text-slate-400">Crea un archivo JSON siguiendo el estándar de OpenSea. Sube este JSON también a Pinata para obtener un segundo CID.</p>
+                    </div>
+                    <div class="relative pl-8 border-l-2 border-emerald-500/30">
+                        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-emerald-600 flex items-center justify-center text-[10px] font-bold">3</div>
+                        <h5 class="font-bold">Minting (Acuñación)</h5>
+                        <p class="text-xs text-slate-400">Ejecutas la función <code>safeMint(tu_direccion, "ipfs://CID_DEL_JSON")</code>. ¡Tu NFT ahora es visible en mercados como OpenSea!</p>
+                    </div>
+                </div>
+                <div class="glass p-8 space-y-4">
+                    <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Metadata Estándar (ERC-721)</span>
+                    <pre class="code-font text-emerald-300 text-[11px]">
+{
+  "name": "Cosplay Pro #42",
+  "description": "Edición Legendaria",
+  "image": "ipfs://QmYourImageHash",
+  "external_url": "https://tuweb.cl",
+  "attributes": [
+    {
+      "trait_type": "Rareza",
+      "value": "Épico"
+    },
+    {
+      "trait_type": "Nivel",
+      "value": 100
+    }
+  ]
+}</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutorial Detallado: Pinata -->
+        <section class="pinata-box p-12 rounded-[2rem] space-y-8">
+            <div class="flex items-center gap-4">
+                <img src="https://www.pinata.cloud/favicon.ico" class="w-8 h-8" alt="Pinata">
+                <h3 class="text-3xl font-bold text-[#ffb100]">Tutorial: El Nodo de Pinata</h3>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 text-sm">
+                <div class="space-y-4">
+                    <p class="text-slate-300">
+                        Pinata es un "Pinning Service". IPFS funciona por popularidad: si nadie accede a tu archivo, los nodos lo borran (Garbage Collection).
+                    </p>
+                    <p class="text-slate-400 italic">
+                        Al "pinear" un archivo en Pinata, te aseguras de que sus nodos siempre mantengan una copia activa de tu NFT, garantizando que nunca desaparezca.
+                    </p>
+                </div>
+                <div class="bg-black/40 p-6 rounded-xl space-y-4">
+                    <h5 class="font-bold text-xs uppercase text-slate-500">¿Cómo usar la API?</h5>
+                    <pre class="text-[10px] text-yellow-500/80">
+// Ejemplo rápido con JavaScript
+const pinata = new PinataSDK({ 
+  pinataJWTKey: 'TU_JWT_AQUI' 
+});
+
+const res = await pinata.pinFileToIPFS(archivo);
+console.log("Tu CID es:", res.IpfsHash);</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparativa Técnica -->
+        <section class="space-y-12">
+            <h3 class="text-3xl font-bold text-center">Diferencias de Código: ERC-721 vs ERC-1155</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass p-8 space-y-6">
+                    <h4 class="font-bold text-emerald-400">ERC-721 (NFT Único)</h4>
+                    <p class="text-xs text-slate-400">Cada ID es único. Ideal para obras de arte, dominios (.eth) o ítems coleccionables raros.</p>
+                    <pre class="code-font text-emerald-300 text-[10px]">
+// Cada mint crea un ID nuevo
+function mintUnique(address to) public {
+    _tokenIds++;
+    _safeMint(to, _tokenIds);
+}</pre>
+                </div>
+                <div class="glass p-8 space-y-6">
+                    <h4 class="font-bold text-emerald-400">ERC-1155 (Multi-Token)</h4>
+                    <p class="text-xs text-slate-400">Un mismo ID puede tener múltiples dueños. Ideal para items de juegos (pociones, munición).</p>
+                    <pre class="code-font text-emerald-300 text-[10px]">
+// Un ID con 1000 copias
+function mintBatch(address to) public {
+    _mint(to, POCION_ID, 1000, "");
+}</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deep Dive: IPFS -->
+        <section class="glass p-12 space-y-8">
+            <h3 class="text-3xl font-bold">IPFS: ¿Por qué es vital?</h3>
+            <div class="grid md:grid-cols-2 gap-12 text-sm leading-relaxed">
+                <div class="space-y-4">
+                    <p class="text-slate-300 italic underline decoration-emerald-500/30">El Problema de la Web2:</p>
+                    <p class="text-slate-400">Si guardas tu foto en `tuweb.com/foto.jpg` y dejas de pagar el hosting, el NFT queda "roto" (enlace muerto). El dueño del NFT pierde su arte.</p>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-emerald-400 italic underline decoration-emerald-500/30">La Solución Web3:</p>
+                    <p class="text-slate-400">IPFS usa **Content Addressing**. El link es el ADN del archivo. Mientras alguien en el mundo tenga una copia, tu arte seguirá existiendo.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-20 text-slate-600 text-xs uppercase tracking-widest border-t border-white/5">
+        Web3 Master Lab - Módulo NFTs & IPFS
+    </footer>
+</body>
+</html>

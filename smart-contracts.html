@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Smart Contracts | Web3 Master Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=JetBrains+Mono:wght@400;700&display=swap');
+        body { background-color: #030712; color: #f1f5f9; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.5rem; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        pre { background: #000 !important; border-radius: 1rem; padding: 1.5rem; font-size: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.05); overflow-x: auto; }
+        .accent-text { color: #a855f7; }
+        .step-num { @apply w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center font-bold text-xs; }
+        .highlight-box { border-left: 4px solid #a855f7; background: rgba(168, 85, 247, 0.05); padding: 1.5rem; border-radius: 0 1rem 1rem 0; }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+    <nav class="border-b border-white/5 p-6 flex justify-between items-center sticky top-0 bg-black/60 backdrop-blur-2xl z-50">
+        <a href="index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Volver al Lab
+        </a>
+        <h1 class="text-xl font-black tracking-tighter accent-text uppercase">Smart Contracts Mastery</h1>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 mt-20 space-y-32">
+        <!-- Intro -->
+        <header class="space-y-6">
+            <h2 class="text-6xl font-black leading-tight">El Backend <span class="accent-text text-white underline decoration-purple-500/50">Inmutable</span>.</h2>
+            <p class="text-slate-400 text-xl leading-relaxed">
+                Aquí no hay servidores que se caen ni bases de datos que se hackean. Aprende a programar lógica que vive para siempre en la red.
+            </p>
+        </header>
+
+        <!-- Tutorial: Remix -->
+        <section class="space-y-12">
+            <h3 class="text-3xl font-bold italic">Tutorial: Tu Primer Despliegue</h3>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="flex gap-4">
+                        <div class="step-num">1</div>
+                        <div>
+                            <h5 class="font-bold mb-1">Abre Remix IDE</h5>
+                            <p class="text-xs text-slate-400">Es el editor oficial en la nube para Solidity. No necesitas instalar nada.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="step-num">2</div>
+                        <div>
+                            <h5 class="font-bold mb-1">Escribe tu Código</h5>
+                            <p class="text-xs text-slate-400">Crea un archivo <code>.sol</code> y pega el código de la derecha.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="step-num">3</div>
+                        <div>
+                            <h5 class="font-bold mb-1">Compila (Ctrl+S)</h5>
+                            <p class="text-xs text-slate-400">El compilador verifica errores y genera el <b>Bytecode</b> para la red.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="step-num">4</div>
+                        <div>
+                            <h5 class="font-bold mb-1">Despliega (Deploy)</h5>
+                            <p class="text-xs text-slate-400">Conecta tu MetaMask a Sepolia y dale a "Deploy". ¡Ya tienes una dirección 0x propia!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <span class="text-[10px] font-bold text-purple-400 uppercase">Ejemplo: Almacén de Datos</span>
+                    <pre class="code-font text-purple-300">
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.18;
+
+contract MiAlmacen {
+    string private mensaje;
+    address public owner;
+
+    event MensajeCambiado(string nuevoMensaje);
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    // Cambiar datos (Cuesta Gas)
+    function guardar(string memory _nuevo) public {
+        mensaje = _nuevo;
+        emit MensajeCambiado(_nuevo);
+    }
+
+    // Leer datos (Gratis)
+    function leer() public view returns (string memory) {
+        return mensaje;
+    }
+}</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conceptos Clave: Anatomía de un Contrato -->
+        <section class="space-y-16">
+            <h3 class="text-4xl font-black">Anatomía de un <span class="accent-text italic">Contrato Inteligente</span></h3>
+            
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Mappings y Estado -->
+                <div class="space-y-6">
+                    <div class="highlight-box">
+                        <h4 class="text-xl font-bold mb-2">1. El Estado (Mappings)</h4>
+                        <p class="text-sm text-slate-400">En lugar de una base de datos SQL, usamos <code>mappings</code>. Es como un diccionario gigante de clave-valor que vive en la blockchain.</p>
+                    </div>
+                    <pre class="code-font text-purple-300 text-[11px]">
+// Clave: Dirección (0x...) -> Valor: Saldo (100)
+mapping(address => uint256) public saldos;
+
+function recargar() public payable {
+    saldos[msg.sender] += msg.value;
+}</pre>
+                </div>
+
+                <!-- Modificadores y Seguridad -->
+                <div class="space-y-6">
+                    <div class="highlight-box">
+                        <h4 class="text-xl font-bold mb-2">2. El Control (Modifiers)</h4>
+                        <p class="text-sm text-slate-400">Los <code>modifiers</code> son como guardias de seguridad. Se ejecutan antes que la función para validar quién puede entrar.</p>
+                    </div>
+                    <pre class="code-font text-purple-300 text-[11px]">
+modifier soloOwner() {
+    require(msg.sender == owner, "No eres el dueño");
+    _; // El guion bajo indica "continúa con la función"
+}
+
+function retirar() public soloOwner {
+    payable(owner).transfer(address(this).balance);
+}</pre>
+                </div>
+            </div>
+
+            <!-- Eventos e Indexación -->
+            <div class="glass p-12 space-y-6">
+                <h4 class="text-2xl font-bold accent-text">3. La Comunicación (Events)</h4>
+                <p class="text-slate-400">La blockchain no puede "avisar" a tu web que algo pasó. Para eso usamos <code>Events</code>. Tu frontend escucha estos eventos para actualizar la UI en tiempo real.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <pre class="code-font text-purple-300 text-[11px]">
+// En Solidity:
+event PagoRecibido(address pagador, uint256 monto);
+
+function pagar() public payable {
+    emit PagoRecibido(msg.sender, msg.value);
+}</pre>
+                    <pre class="code-font text-blue-300 text-[11px]">
+// En JavaScript (Ethers.js):
+contract.on("PagoRecibido", (pagador, monto) => {
+    console.log(`¡Pago de ${pagador} por ${monto}!`);
+    actualizarUI();
+});</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deep Dive: EVM -->
+        <section class="space-y-8 bg-white/5 p-12 rounded-[2rem] border border-white/10">
+            <h3 class="text-3xl font-bold italic">La EVM: El Corazón del Sistema</h3>
+            <div class="grid md:grid-cols-2 gap-12 text-sm leading-relaxed">
+                <p class="text-slate-400">
+                    La **Ethereum Virtual Machine (EVM)** es un computador global descentralizado. Tu código Solidity se compila en un lenguaje de bajo nivel llamado <b>Opcodes</b> (ej: PUSH1, MSTORE, CALL).
+                    <br><br>
+                    Cada operación consume una cantidad específica de <b>Gas</b>. Si tu código es ineficiente, tus usuarios pagarán más por interactuar con él.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 text-xs font-bold text-slate-500">
+                        <div class="w-2 h-2 rounded-full bg-green-500"></div> GAS OPTIMIZATION TIPS
+                    </div>
+                    <ul class="space-y-2 text-xs text-slate-400 italic">
+                        <li>• Usa <code>external</code> en vez de <code>public</code> si solo se llama desde fuera.</li>
+                        <li>• Evita loops (bucles) sobre arrays que pueden crecer infinitamente.</li>
+                        <li>• Guarda solo lo estrictamente necesario en el estado.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conceptos Avanzados -->
+        <section class="grid md:grid-cols-3 gap-8">
+            <div class="glass p-8 space-y-4">
+                <h4 class="font-bold text-purple-400">Gas y Eficiencia</h4>
+                <p class="text-xs text-slate-400">Cada línea de código en el backend cuesta dinero. Aprenderás a usar <code>uint8</code> en lugar de <code>uint256</code> para ahorrarle dinero a tus usuarios.</p>
+            </div>
+            <div class="glass p-8 space-y-4">
+                <h4 class="font-bold text-purple-400">Seguridad (Reentrancy)</h4>
+                <p class="text-xs text-slate-400">A diferencia de la Web2, un bug aquí puede vaciar la billetera de todos. Veremos por qué el orden de las líneas importa.</p>
+            </div>
+            <div class="glass p-8 space-y-4">
+                <h4 class="font-bold text-purple-400">Verificación</h4>
+                <p class="text-xs text-slate-400">Aprende a publicar tu código en Etherscan para que el mundo vea que tu backend es honesto y transparente.</p>
+            </div>
+        </section>
+
+        <!-- Herramientas Pro -->
+        <section class="bg-purple-600/10 border border-purple-600/20 p-10 rounded-3xl space-y-6">
+            <h3 class="text-2xl font-bold">Herramientas Profesionales</h3>
+            <div class="grid md:grid-cols-2 gap-8 text-sm">
+                <div class="space-y-2">
+                    <p class="font-bold italic underline decoration-purple-500/50">Hardhat / Foundry</p>
+                    <p class="text-slate-400">Frameworks para testear tus contratos miles de veces antes de enviarlos a la red real.</p>
+                </div>
+                <div class="space-y-2">
+                    <p class="font-bold italic underline decoration-purple-500/50">OpenZeppelin</p>
+                    <p class="text-slate-400">La librería estándar. No escribas tu propia seguridad, usa los contratos ya auditados por expertos.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-20 text-slate-600 text-xs uppercase tracking-widest border-t border-white/5">
+        Web3 Master Lab - Módulo Smart Contracts
+    </footer>
+</body>
+</html>
